@@ -7,6 +7,8 @@ using System;
 
 public class wire : MonoBehaviour
 {
+    public int cutOrder;
+
     public MeshRenderer mr;
     public enum wireColor
     {

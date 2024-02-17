@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class Inventory: MonoBehaviour
 {
     public static Inventory Instance { get { return _instance; } }
@@ -45,6 +46,14 @@ public class Inventory: MonoBehaviour
             if(SelectedItem) SelectedItem.UI_Item.SetActive(true);
             SelectedItem = null;
         }
+
+        if(Input.GetMouseButtonDown(0)  && SelectedItem !=null)
+        {
+            if(SelectedGameObject[((int)SelectedItem.itemType)].GetComponent<Animator>())
+            {
+                SelectedGameObject[((int)SelectedItem.itemType)].GetComponent<Animator>().SetTrigger("swing");
+            }
+        }
     }
     public void UseItem(Item item)
     {
@@ -81,7 +90,11 @@ public class Inventory: MonoBehaviour
         //cursorItem.gameObject.SetActive(false);
 
         SelectedItem.numberOfUse--;
-        if (SelectedItem.numberOfUse <= 0) Destroy(SelectedItem.UI_Item);
+        if (SelectedItem.numberOfUse <= 0)
+        {
+            Destroy(SelectedItem.UI_Item);
+            SelectedGameObject[((int)SelectedItem.itemType)].SetActive(false);
+        }
         else SelectedItem.UI_Item.SetActive(true);
 
         //SelectedItem = null;

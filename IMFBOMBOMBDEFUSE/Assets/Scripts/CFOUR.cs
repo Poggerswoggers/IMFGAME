@@ -125,6 +125,13 @@ public class CFOUR : MonoBehaviour
                 StartCoroutine(triggerExplosion());
             }
         }
+
+        if(currentTime>0 && currentCutOrder > 3)
+        {
+            bombEnabled = false;
+            timerText.text = "XX:XX";
+            bombSound.enabled = false;
+        }
     }
 
     IEnumerator triggerExplosion()

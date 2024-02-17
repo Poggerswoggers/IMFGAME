@@ -6,7 +6,8 @@ public class Item: MonoBehaviour
 {
     public enum ItemType
     {
-        Wirecutter
+        Wirecutter,
+        BattleAxe
     }
 
     public int numberOfUse = 1;

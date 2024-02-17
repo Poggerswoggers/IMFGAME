@@ -6,7 +6,7 @@ public class UseItemOnThis : MonoBehaviour
 {
     public Item.ItemType ItemType;
 
-    void Start()
+    public virtual void Start()
     {
         
     }

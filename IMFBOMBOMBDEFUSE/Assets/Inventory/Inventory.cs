@@ -61,7 +61,7 @@ public class Inventory: MonoBehaviour
             {
                 SelectedGameObject[i].SetActive(false);
             }
-            Debug.Log((int)item.itemType);
+            //Debug.Log((int)item.itemType);
         }
         //SelectedGameObject[(int)item.itemType].SetActive(true);
         //CursorImage.sprite = SelectedThumbnails[(int)item.itemType];

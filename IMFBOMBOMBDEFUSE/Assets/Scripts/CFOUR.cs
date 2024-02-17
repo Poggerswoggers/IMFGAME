@@ -12,6 +12,7 @@ public class CFOUR : MonoBehaviour
     [SerializeField] AudioSource bombSound;
     public float currentTime;
     bool bombEnabled = true;
+    [SerializeField] AudioClip fastTick;
 
     [SerializeField] GameObject rawImage, Videoplayer;
     //
@@ -21,7 +22,7 @@ public class CFOUR : MonoBehaviour
 
 
     public List<wire> wires;
-    List<int> number;
+    public int[] number;
 
     //CutOrder
     public int currentCutOrder = 0;
@@ -46,7 +47,7 @@ public class CFOUR : MonoBehaviour
 
     void InitialiseWireCombo()
     {
-        number = new List<int>(4);
+        number = new int[4];
         switch(wireCombo)
         {
             case WireCombos.R2G1B1:
@@ -75,25 +76,28 @@ public class CFOUR : MonoBehaviour
                 break;
 
         }
+        currentCutOrder = 0;
+        Array.Sort(number);
 
     }
 
     void SetWireColor(wire currentWire, string color)
     {   
-
+        
         currentWire.SetWireColor(color);
         int order = (int)Enum.Parse(typeof(wireColor), color);
 
         if (!number.Contains(order))
         {
             currentWire.cutOrder = order;
-            number.Add(order);
+            number[currentCutOrder] = order;
         }
         else
         {
             currentWire.cutOrder = order + 1;
-            number.Add(order+1);
+            number[currentCutOrder] = order + 1;
         }
+        currentCutOrder++;
     }
 
     private void OnMouseDown()
@@ -124,7 +128,9 @@ public class CFOUR : MonoBehaviour
     }
 
     IEnumerator triggerExplosion()
-    {        
+    {
+        bombSound.enabled = true;
+        bombSound.PlayOneShot(fastTick);
         yield return new WaitForSeconds(2f);
         rawImage.SetActive(true);
         Videoplayer.SetActive(true);

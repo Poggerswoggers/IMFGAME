@@ -60,7 +60,7 @@ public class wire : UseItemOnThis
     public override void FirstUnlockInstance()
     {
 
-        if(cutOrder > c4.currentCutOrder)
+        if(cutOrder != c4.number[c4.currentCutOrder])
         {
             c4.currentTime = 0;
 
@@ -68,6 +68,7 @@ public class wire : UseItemOnThis
         else
         {
             c4.currentCutOrder++;
+            Debug.Log("new cut order is" + c4.currentCutOrder);
         }
         //maybe add spark particle
 

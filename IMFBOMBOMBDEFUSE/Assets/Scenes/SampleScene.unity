@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1816,7 +1816,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 1
+  - 0.8
   m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
@@ -9482,6 +9482,7 @@ MonoBehaviour:
   timerText: {fileID: 1942692029}
   bombSound: {fileID: 5637808347637106823}
   currentTime: 0
+  fastTick: {fileID: 8300000, guid: ad5f0d1812543af41bb984ed458c5c97, type: 3}
   rawImage: {fileID: 1491408322}
   Videoplayer: {fileID: 568715103}
   wireCombo: 3
@@ -9490,6 +9491,7 @@ MonoBehaviour:
   - {fileID: 9189929490684320539}
   - {fileID: 6877289782316742681}
   - {fileID: 7917903002168293435}
+  number: 
   currentCutOrder: 0
 --- !u!82 &5637808347637106823
 AudioSource:

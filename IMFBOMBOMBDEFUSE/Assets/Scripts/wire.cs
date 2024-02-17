@@ -5,9 +5,11 @@ using System;
 
 
 
-public class wire : MonoBehaviour
+public class wire : UseItemOnThis
 {
     public int cutOrder;
+
+    [SerializeField] CFOUR c4;
 
     public MeshRenderer mr;
     public enum wireColor
@@ -47,8 +49,26 @@ public class wire : MonoBehaviour
         }
     }
 
-    private void OnMouseOver()
+
+    public override void DoesntWork()
     {
-        Debug.Log("HEHEHEHAR");
+        //nothing
+    }
+
+    public override void FirstUnlockInstance()
+    {
+
+        if(cutOrder != c4.currentCutOrder)
+        {
+            c4.currentTime = 0;
+        }
+        //maybe add spark particle
+
+        SetItemAsUsed();
+    }
+
+    public override void SubsequentActivation_IfAny()
+    {
+        //nothing
     }
 }

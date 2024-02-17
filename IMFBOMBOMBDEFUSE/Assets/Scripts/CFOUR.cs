@@ -20,6 +20,9 @@ public class CFOUR : MonoBehaviour
     public List<wire> wires;
     List<int> number;
 
+    //CutOrder
+    public int currentCutOrder = 0;
+
     private enum wireColor
     {
         Red,
@@ -105,7 +108,7 @@ public class CFOUR : MonoBehaviour
         {
             bombSound.enabled = false;
             currentTime = 0;
-            timerText.text = 00 + ":" + 00;
+            timerText.text = "00:00";
         }
     }
 }

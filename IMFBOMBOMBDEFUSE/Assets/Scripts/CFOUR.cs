@@ -11,6 +11,9 @@ public class CFOUR : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] AudioSource bombSound;
     public float currentTime;
+    bool bombEnabled = true;
+
+    [SerializeField] GameObject rawImage, Videoplayer;
     //
     public enum WireCombos { R2G1B1 , R1G1B1Y1 , G1B2Y1, R1G2B1Y1 }
     public WireCombos wireCombo; 
@@ -22,6 +25,8 @@ public class CFOUR : MonoBehaviour
 
     //CutOrder
     public int currentCutOrder = 0;
+
+    //Explosion
 
     private enum wireColor
     {
@@ -98,17 +103,31 @@ public class CFOUR : MonoBehaviour
 
     private void Update()
     {
-        if (currentTime > 0)
+        if (bombEnabled)
         {
-            currentTime -= Time.deltaTime;
-            var time = TimeSpan.FromSeconds(currentTime);
-            timerText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString("00");
+            if (currentTime > 0)
+            {
+                currentTime -= Time.deltaTime;
+                var time = TimeSpan.FromSeconds(currentTime);
+                timerText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString("00");
+            }
+            else
+            {
+                bombEnabled = false;
+                bombSound.enabled = false;
+                currentTime = 0;
+                timerText.text = "00:00";
+
+                StartCoroutine(triggerExplosion());
+            }
         }
-        else
-        {
-            bombSound.enabled = false;
-            currentTime = 0;
-            timerText.text = "00:00";
-        }
+    }
+
+    IEnumerator triggerExplosion()
+    {        
+        yield return new WaitForSeconds(2f);
+        rawImage.SetActive(true);
+        Videoplayer.SetActive(true);
+        gameObject.SetActive(false);
     }
 }

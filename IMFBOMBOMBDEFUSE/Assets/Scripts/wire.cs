@@ -9,6 +9,8 @@ public class wire : UseItemOnThis
 {
     public int cutOrder;
 
+    public AudioSource aS;
+    public AudioClip wireSnip;
     [SerializeField] CFOUR c4;
 
     public MeshRenderer mr;
@@ -58,13 +60,19 @@ public class wire : UseItemOnThis
     public override void FirstUnlockInstance()
     {
 
-        if(cutOrder != c4.currentCutOrder)
+        if(cutOrder > c4.currentCutOrder)
         {
             c4.currentTime = 0;
+
+        }
+        else
+        {
+            c4.currentCutOrder++;
         }
         //maybe add spark particle
 
         SetItemAsUsed();
+        gameObject.SetActive(false);
     }
 
     public override void SubsequentActivation_IfAny()

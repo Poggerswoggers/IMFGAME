@@ -26,7 +26,7 @@ public class wire : UseItemOnThis
 
 
 
-    public void SetWireColor(string color)
+    public void SetWireColor(string color, int cutNumber)
     {
         thisWireColor = (wireColor)Enum.Parse(typeof(wireColor), color);
 
@@ -49,6 +49,7 @@ public class wire : UseItemOnThis
                 break;
                 
         }
+        cutOrder = cutNumber;
     }
 
 
@@ -60,7 +61,7 @@ public class wire : UseItemOnThis
     public override void FirstUnlockInstance()
     {
 
-        if(cutOrder != c4.number[c4.currentCutOrder])
+        if(cutOrder != c4.currentCutOrder)
         {
             c4.currentTime = 0;
 

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class UseItemOnThis_planks : UseItemOnThis
 {
+
     [SerializeField] GameObject tpMarker;
     public AudioSource aS;
     public AudioClip woodbreakSound;
+
+    public int hitpoints;
+    [SerializeField] Transform plankRoot;
 
     public override void Start()
     {
@@ -19,16 +23,29 @@ public class UseItemOnThis_planks : UseItemOnThis
 
     public override void FirstUnlockInstance()
     {
-        aS.PlayOneShot(woodbreakSound);
-        tpMarker.SetActive(true);
-        gameObject.SetActive(false);
-
-        SetItemAsUsed();
+        SubsequentActivation_IfAny();
     }
 
     public override void SubsequentActivation_IfAny()
     {
-       //nothing
+        if(hitpoints>0)
+        {
+            StartCoroutine(DelayCo());
+            hitpoints--;
+            aS.PlayOneShot(woodbreakSound);
+            SetItemAsUsed();
+        }
+        if(hitpoints == 0)
+        {
+            tpMarker.SetActive(true);
+            gameObject.SetActive(false);
+
+        }
+    }
+    IEnumerator DelayCo()
+    {
+        yield return new WaitForSeconds(0.4f);
+        plankRoot.GetChild(hitpoints - 1).gameObject.SetActive(false);
     }
    
 }

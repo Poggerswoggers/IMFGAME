@@ -15,7 +15,7 @@ public class SP_InitSpheres : MonoBehaviour
             {
                 spheres[i].gameObject.SetActive(true);
             }
-            else spheres[i].gameObject.SetActive(false);
+            //else spheres[i].gameObject.SetActive(false);
         }
     }
 

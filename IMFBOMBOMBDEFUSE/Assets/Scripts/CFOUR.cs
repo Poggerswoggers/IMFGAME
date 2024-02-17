@@ -16,16 +16,16 @@ public class CFOUR : MonoBehaviour
 
     [SerializeField] GameObject rawImage, Videoplayer;
     //
-    public enum WireCombos { R2G1B1 , R1G1B1Y1 , G1B2Y1, R1G2B1Y1 }
+    public enum WireCombos { R2G1B1 , R1G1B1Y1 , G1B2Y1, R1G2Y1 }
     public WireCombos wireCombo; 
 
 
 
     public List<wire> wires;
-    public int[] number;
+    //public int[] number;
 
     //CutOrder
-    public int currentCutOrder = 0;
+    public int currentCutOrder = 1;
 
     //Explosion
 
@@ -47,28 +47,39 @@ public class CFOUR : MonoBehaviour
 
     void InitialiseWireCombo()
     {
-        number = new int[4];
+        wireCombo = (WireCombos)UnityEngine.Random.Range(0, Enum.GetValues(typeof(WireCombos)).Length);
+
+        
+        
+        //number = new int[4];
         switch(wireCombo)
         {
             case WireCombos.R2G1B1:
-                SetWireColor(wires[0], "Red" );
-                SetWireColor(wires[1], "Green");
-                SetWireColor(wires[2], "Red");
-                SetWireColor(wires[3], "Blue");
+                SetWireColor(wires[0], "Red",1 );
+                SetWireColor(wires[1], "Red",2);
+                SetWireColor(wires[2], "Green",3);
+                SetWireColor(wires[3], "Blue",4);
                 break;
 
             case WireCombos.R1G1B1Y1:
-                SetWireColor(wires[0], "Red");
-                SetWireColor(wires[1], "Blue");
-                SetWireColor(wires[2], "Green");
-                SetWireColor(wires[3], "Yellow");
+                SetWireColor(wires[0], "Red",4);
+                SetWireColor(wires[1], "Blue",3);
+                SetWireColor(wires[2], "Green",2);
+                SetWireColor(wires[3], "Yellow",1);
                 break;
 
-            case WireCombos.R1G2B1Y1:
-                SetWireColor(wires[0], "Red");
-                SetWireColor(wires[1], "Green");
-                SetWireColor(wires[2], "Green");
-                SetWireColor(wires[3], "Yellow");
+            case WireCombos.R1G2Y1:
+                SetWireColor(wires[0], "Red",2);
+                SetWireColor(wires[1], "Green",1);
+                SetWireColor(wires[2], "Green",3);
+                SetWireColor(wires[3], "Yellow",4);
+                break;
+
+            case WireCombos.G1B2Y1:
+                SetWireColor(wires[0], "Green", 3);
+                SetWireColor(wires[1], "Blue", 1);
+                SetWireColor(wires[2], "Blue", 2);
+                SetWireColor(wires[3], "Yellow", 4);
                 break;
 
             default:
@@ -76,17 +87,18 @@ public class CFOUR : MonoBehaviour
                 break;
 
         }
-        currentCutOrder = 0;
-        Array.Sort(number);
+        //currentCutOrder = 0;
+        //Array.Sort(number);
 
     }
 
-    void SetWireColor(wire currentWire, string color)
+    void SetWireColor(wire currentWire, string color, int cutOrder)
     {   
         
-        currentWire.SetWireColor(color);
-        int order = (int)Enum.Parse(typeof(wireColor), color);
+        currentWire.SetWireColor(color, cutOrder);
+        //int order = (int)Enum.Parse(typeof(wireColor), color);
 
+        /*
         if (!number.Contains(order))
         {
             currentWire.cutOrder = order;
@@ -98,6 +110,7 @@ public class CFOUR : MonoBehaviour
             number[currentCutOrder] = order + 1;
         }
         currentCutOrder++;
+        */
     }
 
     private void OnMouseDown()
@@ -126,7 +139,7 @@ public class CFOUR : MonoBehaviour
             }
         }
 
-        if(currentTime>0 && currentCutOrder > 3)
+        if(currentTime>0 && currentCutOrder > wires.Count)
         {
             bombEnabled = false;
             timerText.text = "XX:XX";
@@ -141,6 +154,6 @@ public class CFOUR : MonoBehaviour
         yield return new WaitForSeconds(2f);
         rawImage.SetActive(true);
         Videoplayer.SetActive(true);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

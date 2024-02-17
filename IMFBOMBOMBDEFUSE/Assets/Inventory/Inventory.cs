@@ -68,6 +68,13 @@ public class Inventory: MonoBehaviour
         //cursorItem.gameObject.SetActive(true);
         //item.UI_Item.SetActive(false);
     }
+    
+    public void KeepItem(Item item)
+    {
+        SelectedItem = null;
+        SelectedGameObject[(int)item.itemType].SetActive(false);
+    }
+
 
     public void UsedItem()
     {

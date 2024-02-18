@@ -17,6 +17,9 @@ public class DialPoint : MonoBehaviour
     [SerializeField] GameObject worldlock;
     [SerializeField] GameObject tp;
 
+    //aduio
+    public AudioSource aS;
+    public AudioClip click;
     private void Start()
     {
         waitTime = waitTimeMax;
@@ -35,6 +38,7 @@ public class DialPoint : MonoBehaviour
                 currentDialNumber = other.GetComponent<Lockpoints>().number;
                 if (lpoints[currentOrder].GetComponent<Lockpoints>().number == currentDialNumber)
                 {
+                    aS.PlayOneShot(click);
                     set = true;
                     waitTime = waitTimeMax;
                     currentOrder++;

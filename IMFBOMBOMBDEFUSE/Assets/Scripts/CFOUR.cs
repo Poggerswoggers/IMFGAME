@@ -16,7 +16,7 @@ public class CFOUR : MonoBehaviour
 
     [SerializeField] GameObject rawImage, Videoplayer;
     //
-    public enum WireCombos { R2G1B1 , R1G1B1Y1 , G1B2Y1, R1G2Y1 }
+    public enum WireCombos { R2G1B1 , R1G1B1Y1 , G1B2Y1, R1G2Y1, R2B1Y1, R2Y2, G2B1Y1, B2R1G1 }
     public WireCombos wireCombo; 
 
 
@@ -82,6 +82,34 @@ public class CFOUR : MonoBehaviour
                 SetWireColor(wires[3], "Yellow", 4);
                 break;
 
+            case WireCombos.R2B1Y1:
+                SetWireColor(wires[0], "Red", 1);
+                SetWireColor(wires[1], "Blue", 3);
+                SetWireColor(wires[2], "Yellow", 4);
+                SetWireColor(wires[3], "Red", 2);
+                break;
+
+            case WireCombos.R2Y2:
+                SetWireColor(wires[0], "Red", 1);
+                SetWireColor(wires[1], "Yellow", 3);
+                SetWireColor(wires[2], "Red", 2);
+                SetWireColor(wires[3], "Yellow", 4);
+                break;
+
+            case WireCombos.G2B1Y1:
+                SetWireColor(wires[0], "Green", 1);
+                SetWireColor(wires[1], "Blue", 2);
+                SetWireColor(wires[2], "Green", 3);
+                SetWireColor(wires[3], "Yellow", 4);
+                break;
+
+            case WireCombos.B2R1G1:
+                SetWireColor(wires[0], "Red", 4);
+                SetWireColor(wires[1], "Green", 3);
+                SetWireColor(wires[2], "Blue", 1);
+                SetWireColor(wires[3], "Blue", 2);
+                break;
+
             default:
                 Debug.Log("Defaulted");
                 break;
@@ -139,11 +167,12 @@ public class CFOUR : MonoBehaviour
             }
         }
 
-        if(currentTime>0 && currentCutOrder > wires.Count)
+        if(currentTime>0 && currentCutOrder > wires.Count && bombEnabled)
         {
             bombEnabled = false;
             timerText.text = "XX:XX";
             bombSound.enabled = false;
+            FindObjectOfType<PlayerManagment>().BombDiffuse(true);
         }
     }
 
@@ -154,6 +183,9 @@ public class CFOUR : MonoBehaviour
         yield return new WaitForSeconds(2f);
         rawImage.SetActive(true);
         Videoplayer.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        FindObjectOfType<PlayerManagment>().BombDiffuse(false);
+        Destroy(gameObject);
         //gameObject.SetActive(false);
     }
 }

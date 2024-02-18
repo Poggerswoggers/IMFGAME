@@ -29,17 +29,8 @@ public class DialLock : MonoBehaviour
 
     private void OnMouseDown()
     {
-
-        if (!dialLock.activeSelf)
-        {
-            dialLock.SetActive(true);
-            active = true;
-        }
-        else
-        {
-            dialLock.SetActive(false);
-            active = false;
-        }
+        dialLock.SetActive(true);
+        active = true;
     }
 
 

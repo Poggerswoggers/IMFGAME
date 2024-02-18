@@ -37,14 +37,17 @@ public class UseItemOnThis_planks : UseItemOnThis
         }
         if(hitpoints == 0)
         {
-            tpMarker.SetActive(true);
+            if (tpMarker != null)
+            {
+                tpMarker.SetActive(true);
+            }
             gameObject.SetActive(false);
 
         }
     }
     IEnumerator DelayCo()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         plankRoot.GetChild(hitpoints - 1).gameObject.SetActive(false);
     }
    

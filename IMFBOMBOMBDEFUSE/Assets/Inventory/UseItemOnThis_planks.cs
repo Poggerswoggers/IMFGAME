@@ -14,7 +14,7 @@ public class UseItemOnThis_planks : UseItemOnThis
 
     public override void Start()
     {
-        tpMarker.SetActive(false);
+        if(tpMarker !=null) tpMarker.SetActive(false);
     }
     public override void DoesntWork()
     {

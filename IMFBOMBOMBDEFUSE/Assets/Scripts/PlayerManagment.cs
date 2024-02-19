@@ -16,7 +16,11 @@ public class PlayerManagment : MonoBehaviour
 
     [SerializeField] int bombs;
 
-    public GameObject endCanvas;
+
+    //End game
+    public GameObject endWinCanvas;
+    public GameObject endLoseCanvas;
+    [SerializeField] GameObject exitTp;
 
     public AudioSource aS;
 
@@ -34,9 +38,14 @@ public class PlayerManagment : MonoBehaviour
         bombDiffused++;
         bombtext.text = "BOMB DIFFUSED:" + bombDiffused.ToString() + "/" + bombs;
 
-        if(bombDiffused == bombs || !con)
+        if(bombDiffused == bombs)
         {
-            endCanvas.SetActive(true);
+            exitTp.SetActive(true);
+        }
+
+        if(!con)
+        {
+            endLoseCanvas.SetActive(true);
             aS.enabled = false;
         }
     }

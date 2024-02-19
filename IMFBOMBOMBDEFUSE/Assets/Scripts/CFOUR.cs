@@ -63,8 +63,8 @@ public class CFOUR : MonoBehaviour
 
             case WireCombos.R1G1B1Y1:
                 SetWireColor(wires[0], "Red",4);
-                SetWireColor(wires[1], "Blue",3);
-                SetWireColor(wires[2], "Green",2);
+                SetWireColor(wires[1], "Blue",2);
+                SetWireColor(wires[2], "Green",3);
                 SetWireColor(wires[3], "Yellow",1);
                 break;
 
